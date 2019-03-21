@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Movie } from 'src/app/shared/models/movie';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-movies-list',
@@ -14,16 +16,21 @@ export class MoviesListComponent implements OnInit {
   favoriteMovieEmitter = new EventEmitter<Movie>();
 
   favoriteMovies: string | Array<Movie>;
+  isUserAuth: boolean;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private storageService: StorageService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isUserAuth = this.authService.isUserAuth;
+  }
 
   changeFavoriteStatus(movie: Movie): void {
     this.favoriteMovieEmitter.emit(movie);
   }
 
   getFavoriteMoviesFromStorage(): void {
-    this.favoriteMovies = localStorage.getItem('favoriteMovies');
+    this.favoriteMovies = this.storageService.getFromLocal('favoriteMovies');
   }
 }
