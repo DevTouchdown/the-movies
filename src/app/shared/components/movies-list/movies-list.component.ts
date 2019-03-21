@@ -26,8 +26,4 @@ export class MoviesListComponent implements OnInit {
   getFavoriteMoviesFromStorage(): void {
     this.favoriteMovies = localStorage.getItem('favoriteMovies');
   }
-
-  // changePage(direction: string) {
-
-  // }
 }
