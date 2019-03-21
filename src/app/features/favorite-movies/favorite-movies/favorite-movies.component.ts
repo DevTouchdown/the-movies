@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Movie } from 'src/app/shared/models/movie';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-favorite-movies',
@@ -11,13 +12,14 @@ export class FavoriteMoviesComponent implements OnInit {
   movies: Array<Movie>;
   favoriteMovies: Array<Movie>;
 
+  constructor(private storageService: StorageService) { }
 
   ngOnInit() {
     this.loadFavoriteMovies();
   }
 
   loadFavoriteMovies(): void {
-    this.favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies'));
+    this.favoriteMovies = JSON.parse(this.storageService.getFromLocal('favoriteMovies'));
     if (this.favoriteMovies === undefined || this.favoriteMovies === null) {
       this.favoriteMovies = [];
     }
@@ -48,6 +50,6 @@ export class FavoriteMoviesComponent implements OnInit {
       this.favoriteMovies.splice(found, 1);
     }
 
-    localStorage.setItem('favoriteMovies', JSON.stringify(this.favoriteMovies));
+    this.storageService.addToLocal('favoriteMovies', JSON.stringify(this.favoriteMovies));
   }
 }
