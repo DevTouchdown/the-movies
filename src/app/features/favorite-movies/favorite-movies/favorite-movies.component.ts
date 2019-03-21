@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Movie } from 'src/app/shared/models/movie';
-import { MoviesService } from 'src/app/core/services/movies.service';
 
 @Component({
   selector: 'app-favorite-movies',
@@ -12,7 +11,6 @@ export class FavoriteMoviesComponent implements OnInit {
   movies: Array<Movie>;
   favoriteMovies: Array<Movie>;
 
-  constructor(private movieService: MoviesService) { }
 
   ngOnInit() {
     this.loadFavoriteMovies();
