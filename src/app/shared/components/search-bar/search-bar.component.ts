@@ -12,8 +12,7 @@ export class SearchBarComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   search(): void {
     this.searchTerm = this.searchTerm.trim();
