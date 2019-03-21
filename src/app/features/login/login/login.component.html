@@ -1,0 +1,27 @@
+<div class="container">
+  <form>
+    <div class="form-row align-items-center justify-content-center">
+      <div class="col-sm-12 col-md-4">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Username</div>
+          </div>
+          <input type="text" class="form-control" id="password" name="username" placeholder="Username" [(ngModel)]="username">
+        </div>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-sm-12 col-md-4">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Password</div>
+          </div>
+          <input type="password" class="form-control" id="username" name="password" placeholder="Password" [(ngModel)]="password">
+        </div>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-sm-12 col-md-4">
+        <button type="submit" class="btn btn-primary login-button mb-2 float-right" (click)="login()">Login</button>
+      </div>
+    </div>
+  </form>
+</div>

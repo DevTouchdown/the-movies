@@ -1,0 +1,2 @@
+<app-search-bar (searchEmitter)="searchMovies($event)"></app-search-bar>
+<app-movies-list [movies]="movies" (favoriteMovieEmitter)="changeFavoriteMovieStatus($event)"></app-movies-list>

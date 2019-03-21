@@ -1,0 +1,14 @@
+<div class="container">
+  <div *ngIf="movies">
+    <div class="card mb-2" *ngFor="let movie of movies">
+      <div class="card-body">
+        <span scope="row">{{ movie.Title }}</span>
+        <span> ( {{ movie.Year }} )</span>
+        <img class="favorite-heart float-right" [ngClass]="{'favorite': movie.Favorite}" src="../../../../assets/images/layout/heart.png" (click)="changeFavoriteStatus(movie)">
+        <img class="details-eye float-right" src="../../../../assets/images/layout/eye.png" [routerLink]="['details', movie.imdbID]">
+      </div>
+    </div>
+    <!-- <button type="button" class="btn btn-outline-primary" (click)="changePage('previous')"><</button>
+    <button type="button" class="btn btn-outline-primary" (click)="changePage('next')">></button> -->
+  </div>
+</div>
