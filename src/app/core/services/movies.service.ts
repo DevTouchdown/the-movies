@@ -12,15 +12,11 @@ import { MovieSearch } from 'src/app/shared/models/movie-search';
 export class MoviesService {
   constructor(private http: HttpClient) {}
 
-  getMovies(): Observable<MovieSearch> {
-    return this.http.get<MovieSearch>(`${environment.omdbApiUrl}&s=${environment.defaultSearch}`);
+  getMoviesByTitle(title: string, page: number | string): Observable<MovieSearch> {
+    return this.http.get<any>(`${environment.omdbApiUrl}s=${title}&page=${page}`);
   }
 
   getMovieById(id: number | string): Observable<Movie> {
     return this.http.get<any>(`${environment.omdbApiUrl}i=${id}`);
-  }
-
-  getMoviesByTitle(title: string): Observable<MovieSearch> {
-    return this.http.get<any>(`${environment.omdbApiUrl}s=${title}`);
   }
 }
