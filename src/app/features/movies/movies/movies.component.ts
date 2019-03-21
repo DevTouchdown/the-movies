@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/app/shared/models/movie';
 import { MoviesService } from 'src/app/core/services/movies.service';
 import { Pagination } from 'src/app/shared/models/pagination';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-movies',
@@ -14,10 +16,15 @@ export class MoviesComponent implements OnInit {
   favoriteMovies: Array<Movie>;
   pagination: Pagination;
   movie = 'terminator';
+  isUserAuth: boolean;
 
-  constructor(private movieService: MoviesService) { }
+  constructor(
+    private authService: AuthService,
+    private movieService: MoviesService,
+    private storageService: StorageService) { }
 
   ngOnInit() {
+    this.isUserAuth = this.authService.isUserAuth;
     this.setPagination();
     this.loadMovies();
   }
@@ -42,7 +49,7 @@ export class MoviesComponent implements OnInit {
   }
 
   getFavoriteMoviesFromStorage(): void {
-    this.favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies'));
+    this.favoriteMovies = JSON.parse(this.storageService.getFromLocal('favoriteMovies'));
     if (this.favoriteMovies === undefined || this.favoriteMovies === null) {
       this.favoriteMovies = [];
     }
@@ -60,7 +67,7 @@ export class MoviesComponent implements OnInit {
     } else {
       this.favoriteMovies.push(favoriteMovie);
     }
-    localStorage.setItem('favoriteMovies', JSON.stringify(this.favoriteMovies));
+    this.storageService.addToLocal('favoriteMovies', JSON.stringify(this.favoriteMovies));
   }
 
   setPagination(): void {
