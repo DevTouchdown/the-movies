@@ -16,6 +16,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   search(): void {
+    this.searchTerm = this.searchTerm.trim();
     this.searchEmitter.emit(this.searchTerm);
   }
 }
