@@ -6,12 +6,14 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { MoviesListComponent } from './components/movies-list/movies-list.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { MoviesListPaginationComponent } from './components/movies-list-pagination/movies-list-pagination.component';
 
 @NgModule({
   declarations: [
     SearchBarComponent,
     MoviesListComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    MoviesListPaginationComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
     SearchBarComponent,
     MoviesListComponent,
     MovieDetailsComponent,
+    MoviesListPaginationComponent,
     FormsModule
   ]
 })
