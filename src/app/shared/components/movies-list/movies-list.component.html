@@ -4,7 +4,7 @@
       <div class="card-body">
         <span scope="row">{{ movie.Title }}</span>
         <span> ( {{ movie.Year }} )</span>
-        <img class="favorite-heart float-right" [ngClass]="{'favorite': movie.Favorite}" src="../../../../assets/images/layout/heart.png" (click)="changeFavoriteStatus(movie)">
+        <img class="favorite-heart float-right" [ngClass]="{'favorite': movie.Favorite}" src="../../../../assets/images/layout/heart.png" (click)="changeFavoriteStatus(movie)" *ngIf="isUserAuth">
         <img class="details-eye float-right" src="../../../../assets/images/layout/eye.png" [routerLink]="['details', movie.imdbID]">
       </div>
     </div>
