@@ -1,22 +1,48 @@
 <div class="container">
   <ng-container *ngIf="movie">
-    <img [src]="movie.Poster">
-    <span>{{ movie.Title }}</span>
-    <br/>
-    <span>{{ movie.Year }}</span>
-    <br/>
-    <span>{{ movie.Runtime }}</span>
-    <br/>
-    <span>{{ movie.Genre }}</span>
-    <br/>
-    <span>{{ movie.Director }}</span>
-    <br/>
-    <span>{{ movie.Country }}</span>
-    <br/>
-    <span>{{ movie.Actors }}</span>
-    <br/>
-    <span>{{ movie.Plot }}</span>
-    <br/>
-    <span>{{ movie.Awards }}</span>
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img [src]="movie.Poster" class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 mb-3">
+                <h4 class="card-title">{{ movie.Title }}</h4>
+              </div>
+              <div class="col-6 mb-4">
+                <h5 class="card-subtitle mb-2 text-muted">Year</h5>
+                <p class="card-text">{{ movie.Year }}</p>
+              </div>
+              <div class="col-6 mb-4">
+                <h5 class="card-subtitle mb-2 text-muted">Genre</h5>
+                <p class="card-text">{{ movie.Genre }}</p>
+              </div>
+              <div class="col-6 mb-4">
+                <h5 class="card-subtitle mb-2 text-muted">Director</h5>
+                <p class="card-text">{{ movie.Director }}</p>
+              </div>
+              <div class="col-6 mb-4">
+                <h5 class="card-subtitle mb-2 text-muted">Country</h5>
+                <p class="card-text">{{ movie.Country }}</p>
+              </div>
+              <div class="col-sm-12 col-md-6 mb-4">
+                <h5 class="card-subtitle mb-2 text-muted">Actors</h5>
+                <p class="card-text">{{ movie.Actors }}</p>
+              </div>
+              <div class="col-sm-12 col-md-6 mb-4">
+                <h5 class="card-subtitle mb-2 text-muted">Awards</h5>
+                <p class="card-text">{{ movie.Awards }}</p>
+              </div>
+              <div class="col-12 mb-4">
+                <h5 class="card-subtitle mb-2 text-muted">Plot</h5>
+                <p class="card-text">{{ movie.Plot }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </ng-container>
 </div>
