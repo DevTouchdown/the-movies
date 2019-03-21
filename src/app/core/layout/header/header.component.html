@@ -11,11 +11,14 @@
       <li class="nav-item">
         <a class="nav-link" href="#" routerLink="movies" routerLinkActive="active">Movies</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="isUserAuth">
         <a class="nav-link" href="#" routerLink="favorite-movies" routerLinkActive="active">Favorites</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="login" routerLinkActive="active" tabindex="-1">Login</a>
+      <li class="nav-item" *ngIf="!isUserAuth">
+        <a class="nav-link" href="#" routerLink="login" routerLinkActive="active">Sign in</a>
+      </li>
+      <li class="nav-item" *ngIf="isUserAuth">
+        <a class="nav-link" href="#" (click)="closeSession()">Disconnect</a>
       </li>
     </ul>
   </div>
