@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
 
 import { Movie } from 'src/app/shared/models/movie';
 import { MoviesService } from 'src/app/core/services/movies.service';
@@ -18,13 +19,12 @@ export class MovieDetailsComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap) => {
+    this.getParamsFromRoute().subscribe((params: ParamMap) => {
       this.movieId = params.get('id');
       if (this.movieId) {
         this.loadMovieDetails(this.movieId);
       }
     });
-    this.loadMovieDetails(this.movieId);
   }
 
   loadMovieDetails(id: string): void {
@@ -35,4 +35,7 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
+  getParamsFromRoute(): Observable<any> {
+    return this.route.paramMap;
+  }
 }
