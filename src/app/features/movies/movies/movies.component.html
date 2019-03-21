@@ -1,2 +1,3 @@
 <app-search-bar (searchEmitter)="searchMovies($event)"></app-search-bar>
 <app-movies-list [movies]="movies" (favoriteMovieEmitter)="changeFavoriteMovieStatus($event)"></app-movies-list>
+<app-movies-list-pagination [pagination]="pagination" (changePageEmitter)="changePage($event)"></app-movies-list-pagination>
