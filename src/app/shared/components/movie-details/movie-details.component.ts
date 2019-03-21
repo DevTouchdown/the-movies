@@ -42,8 +42,8 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   replacePosterIfMovieDoesnHaveOne(movie: Movie): void {
-    this.moviePoster = (movie.Poster.toLocaleLowerCase().indexOf('images') !== -1)
-      ? '/assets/images/layout/the-movies-logo.png'
+    this.moviePoster = (movie.Poster.toLocaleLowerCase().indexOf('images') === -1)
+      ? '/assets/images/layout/no-cover.png'
       : movie.Poster;
   }
 }
