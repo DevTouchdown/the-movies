@@ -12,6 +12,7 @@ import { MoviesService } from 'src/app/core/services/movies.service';
 })
 export class MovieDetailsComponent implements OnInit {
   movieId: string;
+  moviePoster: string;
   movie: Movie;
 
   constructor(
@@ -30,6 +31,7 @@ export class MovieDetailsComponent implements OnInit {
   loadMovieDetails(id: string): void {
     this.movieService.getMovieById(id).subscribe(movie => {
       this.movie = movie;
+      this.replacePosterIfMovieDoesnHaveOne(movie);
     }, error => {
       console.log('Unexpected error loading movie details from database: ', error);
     });
@@ -37,5 +39,11 @@ export class MovieDetailsComponent implements OnInit {
 
   getParamsFromRoute(): Observable<any> {
     return this.route.paramMap;
+  }
+
+  replacePosterIfMovieDoesnHaveOne(movie: Movie): void {
+    this.moviePoster = (movie.Poster.toLocaleLowerCase().indexOf('images') !== -1)
+      ? '/assets/images/layout/the-movies-logo.png'
+      : movie.Poster;
   }
 }
