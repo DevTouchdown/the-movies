@@ -4,7 +4,7 @@ import { Movie } from 'src/app/shared/models/movie';
 import { MoviesService } from 'src/app/core/services/movies.service';
 import { Pagination } from 'src/app/shared/models/pagination';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { StorageService } from 'src/app/core/services/storage.service';
+import { FavoriteService } from 'src/app/core/services/favorite.service';
 
 @Component({
   selector: 'app-movies',
@@ -12,30 +12,35 @@ import { StorageService } from 'src/app/core/services/storage.service';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
+  movie: string;
   movies: Array<Movie>;
   favoriteMovies: Array<Movie>;
   pagination: Pagination;
-  movie = 'terminator';
   isUserAuth: boolean;
 
   constructor(
     private authService: AuthService,
     private movieService: MoviesService,
-    private storageService: StorageService) { }
+    private favoriteService: FavoriteService) { }
 
   ngOnInit() {
-    this.isUserAuth = this.authService.isUserAuth;
-    this.setPagination();
+    this.setUserAuth();
+    this.setDefaultMovieSearch();
+    this.initPagination();
     this.loadMovies();
+    this.loadFavoriteMovies();
   }
 
   loadMovies(): void {
     this.movieService.getMoviesByTitle(`*${this.movie}*`, this.pagination.currentPage).subscribe(movies => {
-      if (movies && movies.Search.length > 0) {
+      if (movies.Search && movies.Search.length > 0) {
         this.movies = movies.Search;
         this.pagination.totalItems = parseInt(movies.totalResults, 10);
         this.pagination.lastPage = Math.ceil(parseFloat(movies.totalResults) / 10);
         this.mapFavoriteMoviesToMovieSearchResults();
+      } else {
+        this.movies = [];
+        this.initPagination();
       }
     }, error => {
       console.log('Unexpected error searching movies in database: ', error);
@@ -44,15 +49,12 @@ export class MoviesComponent implements OnInit {
 
   searchMovies(movie: string): void {
     this.pagination.currentPage = 1;
-    this.movie = (movie === '' || movie === undefined) ? 'terminator' : movie;
+    this.movie = movie;
     this.loadMovies();
   }
 
-  getFavoriteMoviesFromStorage(): void {
-    this.favoriteMovies = JSON.parse(this.storageService.getFromLocal('favoriteMovies'));
-    if (this.favoriteMovies === undefined || this.favoriteMovies === null) {
-      this.favoriteMovies = [];
-    }
+  loadFavoriteMovies(): void {
+    this.favoriteMovies = this.favoriteService.getFavorites();
   }
 
   changeFavoriteMovieStatus(favoriteMovie: Movie): void {
@@ -63,14 +65,13 @@ export class MoviesComponent implements OnInit {
 
     const indexOfFavoriteMovieInFavoriteMoviesCollection = this.favoriteMovies.findIndex(movie => movie.imdbID === favoriteMovie.imdbID);
     if (indexOfFavoriteMovieInFavoriteMoviesCollection === undefined || indexOfFavoriteMovieInFavoriteMoviesCollection > -1) {
-      this.favoriteMovies.splice(indexOfFavoriteMovieInFavoriteMoviesCollection, 1);
+      this.favoriteService.removeFavorite(indexOfFavoriteMovieInFavoriteMoviesCollection);
     } else {
-      this.favoriteMovies.push(favoriteMovie);
+      this.favoriteService.addFavorite(favoriteMovie);
     }
-    this.storageService.addToLocal('favoriteMovies', JSON.stringify(this.favoriteMovies));
   }
 
-  setPagination(): void {
+  initPagination(): void {
     this.pagination = {
       totalItems: 1,
       startingPage: 1,
@@ -87,7 +88,7 @@ export class MoviesComponent implements OnInit {
   }
 
   mapFavoriteMoviesToMovieSearchResults(): void {
-    this.getFavoriteMoviesFromStorage();
+    this.loadFavoriteMovies();
     if (this.favoriteMovies && this.favoriteMovies.length > 0) {
       this.movies.forEach(movie => {
         this.favoriteMovies.forEach(favoriteMovie => {
@@ -97,5 +98,13 @@ export class MoviesComponent implements OnInit {
         });
       });
     }
+  }
+
+  setUserAuth(): void {
+    this.isUserAuth = this.authService.isUserAuth;
+  }
+
+  setDefaultMovieSearch(): void {
+    this.movie = 'terminator';
   }
 }
