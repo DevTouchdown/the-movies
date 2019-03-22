@@ -27,8 +27,4 @@ export class MoviesListComponent implements OnInit {
   changeFavoriteStatus(movie: Movie): void {
     this.favoriteMovieEmitter.emit(movie);
   }
-
-  getFavoriteMoviesFromStorage(): void {
-    this.favoriteMovies = this.storageService.getFromLocal('favoriteMovies');
-  }
 }
