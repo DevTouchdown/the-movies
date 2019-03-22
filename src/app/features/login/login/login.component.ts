@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
+
+import { AuthService } from 'src/app/core/services/auth.service';
+import { environment } from 'src/environments/environment';
+import { Credentials } from 'src/app/shared/models/credentials';
 
 @Component({
   selector: 'app-login',
@@ -8,25 +11,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  username: string;
-  password: string;
+  credentials: Credentials;
+  wrongCredentials: boolean;
 
   constructor(
     private authService: AuthService,
     private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initializeCredentials();
+  }
 
   login(): void {
-    if (this.username === 'movies' && this.password === 'movies') {
+    if (this.credentials.username === environment.credentials.username && this.credentials.password === environment.credentials.password) {
       this.authService.isUserAuth = true;
+      this.wrongCredentials = false;
       sessionStorage.setItem('isUserAuth', 'true');
       this.router.navigate(['']).then(() => {
         window.location.href = window.location.href;
       });
     } else {
-      this.username = undefined;
-      this.password = undefined;
+      this.initializeCredentials();
+      this.wrongCredentials = true;
     }
+  }
+
+  initializeCredentials(): void {
+    this.credentials = {
+      username: undefined,
+      password: undefined
+    };
   }
 }
