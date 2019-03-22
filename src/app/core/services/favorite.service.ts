@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 
-import { environment } from '../../../environments/environment';
 import { Movie } from 'src/app/shared/models/movie';
 
 @Injectable({
@@ -10,17 +7,22 @@ import { Movie } from 'src/app/shared/models/movie';
 })
 export class FavoriteService {
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  getFavorites(): Observable<Movie[]> {
-    return this.http.get<any[]>(environment.omdbApiUrl);
+  getFavorites(): Array<Movie> {
+    const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies'));
+    return (favoriteMovies !== undefined && favoriteMovies !== null) ? favoriteMovies : [];
   }
 
-  addFavorite(): Observable<Movie[]> {
-    return this.http.get<any[]>(environment.omdbApiUrl);
+  addFavorite(movie: Movie) {
+    const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies'));
+    favoriteMovies.push(movie);
+    localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
   }
 
-  removeFavorite(): Observable<Movie[]> {
-    return this.http.get<any[]>(environment.omdbApiUrl);
+  removeFavorite(index: number): void {
+    const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies'));
+    favoriteMovies.splice(index, 1);
+    localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
   }
 }
