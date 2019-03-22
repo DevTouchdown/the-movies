@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class AuthService {
   isUserLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
+  previousUrl: string;
 
   constructor() { }
 
