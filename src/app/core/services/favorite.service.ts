@@ -15,8 +15,12 @@ export class FavoriteService {
   }
 
   addFavorite(movie: Movie) {
-    const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies'));
-    favoriteMovies.push(movie);
+    let favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies'));
+    if (favoriteMovies) {
+      favoriteMovies.push(movie);
+    } else {
+      favoriteMovies = [movie];
+    }
     localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
   }
 
