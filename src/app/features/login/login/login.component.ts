@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
     if (this.credentials.username === environment.credentials.username && this.credentials.password === environment.credentials.password) {
       this.authService.login();
       this.wrongCredentials = false;
-      this.router.navigate(['']);
+      const redirect = this.authService.previousUrl ? this.authService.previousUrl : '';
+      this.router.navigate([redirect]);
     } else {
       this.initializeCredentials();
       this.wrongCredentials = true;
