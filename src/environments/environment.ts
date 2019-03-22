@@ -5,7 +5,11 @@
 export const environment = {
   production: false,
   defaultSearch: '*terminator*',
-  omdbApiUrl: 'http://www.omdbapi.com/?apikey=f12ba140&'
+  omdbApiUrl: 'http://www.omdbapi.com/?apikey=f12ba140&',
+  credentials: {
+    username: 'movies',
+    password: 'movies'
+  }
 };
 
 /*
