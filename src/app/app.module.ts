@@ -13,7 +13,7 @@ import { CoreModule } from './core/core.module';
   imports: [
     AppRoutingModule,
     BrowserModule,
-    CoreModule,
+    CoreModule.forRoot(),
     HttpClientModule
   ],
   providers: [],
