@@ -1,11 +1,9 @@
-<div class="container mt-2">
-  <ng-container *ngIf="pagination">
-    <div class="row">
-      <div class="col-12 mt-4 mb-4 text-center">
-        <button type="button" class="btn btn-primary prev" (click)="changePage('previous')" [disabled]="pagination.currentPage === pagination.startingPage"><</button>
-        <button type="button" class="btn btn-outline-primary" disabled>{{ pagination.currentPage }} / {{ pagination.lastPage }}</button>
-        <button type="button" class="btn btn-primary next" (click)="changePage('next')" [disabled]="pagination.currentPage === pagination.lastPage">></button>
-      </div>
+<div class="container mt-2" *ngIf="pagination && pagination.lastPage > 1">
+  <div class="row">
+    <div class="col-12 mt-4 mb-4 text-center">
+      <button type="button" class="btn btn-primary prev" (click)="changePage('previous')" [disabled]="pagination.currentPage === pagination.startingPage"><</button>
+      <button type="button" class="btn btn-outline-primary" disabled>{{ pagination.currentPage }} / {{ pagination.lastPage }}</button>
+      <button type="button" class="btn btn-primary next" (click)="changePage('next')" [disabled]="pagination.currentPage === pagination.lastPage">></button>
     </div>
-  </ng-container>
+  </div>
 </div>
