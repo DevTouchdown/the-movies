@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Movie } from 'src/app/shared/models/movie';
-import { StorageService } from 'src/app/core/services/storage.service';
+import { FavoriteService } from 'src/app/core/services/favorite.service';
 
 @Component({
   selector: 'app-favorite-movies',
@@ -12,17 +12,14 @@ export class FavoriteMoviesComponent implements OnInit {
   movies: Array<Movie>;
   favoriteMovies: Array<Movie>;
 
-  constructor(private storageService: StorageService) { }
+  constructor(private favoriteService: FavoriteService) { }
 
   ngOnInit() {
     this.loadFavoriteMovies();
   }
 
   loadFavoriteMovies(): void {
-    this.favoriteMovies = JSON.parse(this.storageService.getFromLocal('favoriteMovies'));
-    if (this.favoriteMovies === undefined || this.favoriteMovies === null) {
-      this.favoriteMovies = [];
-    }
+    this.favoriteMovies = this.favoriteService.getFavorites();
   }
 
   searchMovies(event: string): void {
@@ -47,9 +44,8 @@ export class FavoriteMoviesComponent implements OnInit {
     }
 
     if (found === undefined || found > -1) {
-      this.favoriteMovies.splice(found, 1);
+      this.favoriteService.removeFavorite(found);
+      this.loadFavoriteMovies();
     }
-
-    this.storageService.addToLocal('favoriteMovies', JSON.stringify(this.favoriteMovies));
   }
 }
