@@ -2,10 +2,15 @@
   <ng-container *ngSwitchCase="true">
     <div class="card mb-2" *ngFor="let movie of movies">
       <div class="card-body">
-        <span scope="row" class="align-middle">{{ movie.Title }}</span>
-        <span class="align-middle"> ({{ movie.Year }})</span>
-        <img class="favorite-heart float-right" [ngClass]="{'favorite': movie.Favorite}" src="../../../../assets/images/layout/heart.png" (click)="changeFavoriteStatus(movie)" *ngIf="isUserAuth">
-        <img class="details-eye float-right" src="../../../../assets/images/layout/eye.png" [routerLink]="['details', movie.imdbID]">
+        <div class="row">
+          <div class="col-8 my-auto">
+            <span scope="row">{{ movie.Title }}</span>
+          </div>
+          <div class="col-4 my-auto">
+            <img class="favorite-heart float-right" [ngClass]="{'favorite': movie.Favorite}" src="../../../../assets/images/layout/heart.png" (click)="changeFavoriteStatus(movie)" *ngIf="isUserAuth">
+            <img class="details-eye float-right" src="../../../../assets/images/layout/eye.png" [routerLink]="['details', movie.imdbID]">
+          </div>
+        </div>
       </div>
     </div>
   </ng-container>
