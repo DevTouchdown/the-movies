@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../services/auth.service';
-import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +11,7 @@ export class HeaderComponent implements OnInit {
   isUserAuth: boolean;
 
   constructor(
-    private authService: AuthService,
-    private storageService: StorageService) { }
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.isUserAuth = this.authService.isUserAuth;
@@ -21,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   closeSession(): void {
     this.authService.isUserAuth = false;
-    this.storageService.clearAll();
+    sessionStorage.clear();
     window.location.href = window.location.href;
   }
 }
