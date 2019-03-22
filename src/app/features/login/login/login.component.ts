@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 
-import { StorageService } from 'src/app/core/services/storage.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +13,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private storageService: StorageService,
     private router: Router) {}
 
   ngOnInit() {}
@@ -23,7 +20,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     if (this.username === 'movies' && this.password === 'movies') {
       this.authService.isUserAuth = true;
-      this.storageService.addToSession('isUserAuth', 'true');
+      sessionStorage.setItem('isUserAuth', 'true');
       this.router.navigate(['']).then(() => {
         window.location.href = window.location.href;
       });
