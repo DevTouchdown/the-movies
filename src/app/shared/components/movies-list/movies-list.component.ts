@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Movie } from 'src/app/shared/models/movie';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-movies-list',
@@ -19,8 +18,7 @@ export class MoviesListComponent implements OnInit {
   isUserAuth: boolean;
 
   constructor(
-    private authService: AuthService,
-    private storageService: StorageService) { }
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.isUserAuth = this.authService.isUserAuth;
