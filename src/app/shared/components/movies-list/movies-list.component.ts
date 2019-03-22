@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 
 import { Movie } from 'src/app/shared/models/movie';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -14,14 +15,14 @@ export class MoviesListComponent implements OnInit {
   @Output()
   favoriteMovieEmitter = new EventEmitter<Movie>();
 
+  isUserLoggedIn: Observable<boolean>;
   favoriteMovies: string | Array<Movie>;
   isUserAuth: boolean;
 
-  constructor(
-    private authService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.isUserAuth = this.authService.isUserAuth;
+    this.isUserLoggedIn = this.authService.isUserLoggedIn();
   }
 
   changeFavoriteStatus(movie: Movie): void {

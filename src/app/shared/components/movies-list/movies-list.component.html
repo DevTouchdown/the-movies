@@ -7,7 +7,7 @@
             <span scope="row">{{ movie.Title }}</span>
           </div>
           <div class="col-4 my-auto">
-            <img class="favorite-heart float-right" [ngClass]="{'favorite': movie.Favorite}" src="../../../../assets/images/layout/heart.png" (click)="changeFavoriteStatus(movie)" *ngIf="isUserAuth">
+            <img class="favorite-heart float-right" [ngClass]="{'favorite': movie.Favorite}" src="../../../../assets/images/layout/heart.png" (click)="changeFavoriteStatus(movie)" *ngIf="(isUserLoggedIn | async)">
             <img class="details-eye float-right" src="../../../../assets/images/layout/eye.png" [routerLink]="['details', movie.imdbID]">
           </div>
         </div>

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/app/shared/models/movie';
 import { MoviesService } from 'src/app/core/services/movies.service';
 import { Pagination } from 'src/app/shared/models/pagination';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { FavoriteService } from 'src/app/core/services/favorite.service';
 
 @Component({
@@ -19,12 +18,10 @@ export class MoviesComponent implements OnInit {
   isUserAuth: boolean;
 
   constructor(
-    private authService: AuthService,
     private movieService: MoviesService,
     private favoriteService: FavoriteService) { }
 
   ngOnInit() {
-    this.setUserAuth();
     this.setDefaultMovieSearch();
     this.initPagination();
     this.loadMovies();
@@ -98,10 +95,6 @@ export class MoviesComponent implements OnInit {
         });
       });
     }
-  }
-
-  setUserAuth(): void {
-    this.isUserAuth = this.authService.isUserAuth;
   }
 
   setDefaultMovieSearch(): void {

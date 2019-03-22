@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -8,18 +9,15 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isUserAuth: boolean;
+  isUserLoggedIn: Observable<boolean>;
 
-  constructor(
-    private authService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.isUserAuth = this.authService.isUserAuth;
+    this.isUserLoggedIn = this.authService.isUserLoggedIn();
   }
 
   closeSession(): void {
-    this.authService.isUserAuth = false;
-    sessionStorage.clear();
-    window.location.href = window.location.href;
+    this.authService.logout();
   }
 }

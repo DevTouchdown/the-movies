@@ -24,12 +24,9 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.credentials.username === environment.credentials.username && this.credentials.password === environment.credentials.password) {
-      this.authService.isUserAuth = true;
+      this.authService.login();
       this.wrongCredentials = false;
-      sessionStorage.setItem('isUserAuth', 'true');
-      this.router.navigate(['']).then(() => {
-        window.location.href = window.location.href;
-      });
+      this.router.navigate(['']);
     } else {
       this.initializeCredentials();
       this.wrongCredentials = true;
