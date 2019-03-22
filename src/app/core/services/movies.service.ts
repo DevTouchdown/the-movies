@@ -12,7 +12,7 @@ export class MoviesService {
   constructor(private http: HttpClient) {}
 
   getMoviesByTitle(title: string, page: number | string): Observable<any> {
-    return this.http.get<any>(`${environment.omdbApiUrl}s=${title}&page=${page}`);
+    return this.http.get<any>(`${environment.omdbApiUrl}s=${title}&page=${page}&type=movie`);
   }
 
   getMovieById(id: number | string): Observable<Movie> {
