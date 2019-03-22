@@ -7,8 +7,7 @@ import { MovieDetailsComponent } from 'src/app/shared/components/movie-details/m
 const routes: Routes = [
   {
     path: '',
-    component: FavoriteMoviesComponent,
-    // canActivate: [AuthGuard],
+    component: FavoriteMoviesComponent
   },
   {
     path: 'details/:id',

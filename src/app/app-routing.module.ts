@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService } from './core/services/auth-guard.service';
 
 const routes: Routes = [{
     path: '',
@@ -13,7 +14,8 @@ const routes: Routes = [{
     loadChildren: 'src/app/features/movies/movies.module#MoviesModule'
   }, {
     path: 'favorite-movies',
-    loadChildren: 'src/app/features/favorite-movies/favorite-movies.module#FavoriteMoviesModule'
+    loadChildren: 'src/app/features/favorite-movies/favorite-movies.module#FavoriteMoviesModule',
+    canActivate: [AuthGuardService]
   }
 ];
 
