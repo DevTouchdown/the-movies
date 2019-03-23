@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/core/services/auth.service';
-import { environment } from 'src/environments/environment';
 import { Credentials } from 'src/app/shared/models/credentials';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router) {}
+    private router: Router) { }
 
   ngOnInit() {
     this.initializeCredentials();

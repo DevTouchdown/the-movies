@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 
-import { Movie } from 'src/app/shared/models/movie';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Movie } from 'src/app/shared/models/movie';
 
 @Component({
   selector: 'app-movies-list',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FavoriteService } from 'src/app/core/services/favorite.service';
 import { Movie } from 'src/app/shared/models/movie';
 import { MoviesService } from 'src/app/core/services/movies.service';
 import { Pagination } from 'src/app/shared/models/pagination';
-import { FavoriteService } from 'src/app/core/services/favorite.service';
 
 @Component({
   selector: 'app-movies',

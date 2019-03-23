@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Pagination } from '../../models/pagination';
+import { Pagination } from 'src/app/shared/models/pagination';
 
 @Component({
   selector: 'app-movies-list-pagination',
@@ -10,7 +10,7 @@ export class MoviesListPaginationComponent implements OnInit {
   @Input()
   pagination: Pagination;
   @Output()
-  changePageEmitter = new EventEmitter<string|number>();
+  changePageEmitter = new EventEmitter<string | number>();
 
   constructor() { }
 

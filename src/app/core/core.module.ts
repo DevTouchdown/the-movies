@@ -1,13 +1,14 @@
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-import { HeaderComponent } from './layout/header/header.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { AuthService } from './services/auth.service';
-import { MoviesService } from './services/movies.service';
-import { FavoriteService } from './services/favorite.service';
-import { AuthGuardService } from './services/auth-guard.service';
+import { FooterComponent, HeaderComponent } from './layout/';
+import {
+  AuthService,
+  AuthGuardService,
+  FavoriteService,
+  MoviesService
+} from './services';
 
 @NgModule({
   declarations: [
@@ -33,13 +34,14 @@ export class CoreModule {
   }
 
   static forRoot(): ModuleWithProviders {
-  return {
-    ngModule: CoreModule,
-    providers: [
-      MoviesService,
-      FavoriteService,
-      AuthService,
-      AuthGuardService
-    ]
-  };
-}}
+    return {
+      ngModule: CoreModule,
+      providers: [
+        MoviesService,
+        FavoriteService,
+        AuthService,
+        AuthGuardService
+      ]
+    };
+  }
+}
